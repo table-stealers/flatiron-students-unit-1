@@ -2,7 +2,9 @@ require_relative '../../config/environment.rb'
 
 class Student 
 
-  attr_accessor :name, :twitter, :linkedin, :github, :website
+    attr_accessor :name, :profile_pic, :excerpt, :tag_line, :quote, :bio,
+    :education, :work, :website, :twitter, :linkedin, :github, :treehouse,
+    :codeschool, :coderwall, :cities, :favorites
   attr_reader :id
 
   @@db = SQLite3::Database.new 'db/students.db'
