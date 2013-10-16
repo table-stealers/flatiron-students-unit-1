@@ -14,7 +14,7 @@ class Student
   sql = "DROP TABLE IF EXISTS students" 
   @@db.execute(sql)
 
-  sql = "CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, profile_pic TEXT, excerpt TEXT, tag_line TEXT, quote TEXT, bio TEXT, education TEXT,work TEXT, website TEXT, twitter TEXT, linkedin TEXT, github TEXT, treehouse TEXT, codeschool TEXT, coderwall TEXT, cities TEXT, favorites TEXT)"
+  sql = "CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, profile_pic TEXT, tag_line TEXT, quote TEXT, bio TEXT, education TEXT, work TEXT, website TEXT, twitter TEXT, linkedin TEXT, github TEXT, treehouse TEXT, codeschool TEXT, coderwall TEXT, cities TEXT, favorites TEXT)"
   @@db.execute(sql)
 
   def initialize(student_hash=nil, id=nil)
@@ -88,9 +88,9 @@ class Student
   end
 
   def insert 
-    sql = "INSERT INTO students (name, website, twitter, linkedin, github, treehouse, codeschool, coderwall, cities, favorites)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    @@db.execute(sql, self.name, self.website, self.twitter, self.linkedin, self.github, self.treehouse, self.codeschool, self.coderwall, self.cities, self.favorites)
+    sql = "INSERT INTO students (name, profile_pic, tag_line, quote, bio, education, work, website, twitter, linkedin, github, treehouse, codeschool, coderwall, cities, favorites)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    @@db.execute(sql, self.name, self.profile_pic, self.tag_line, self.quote, self.bio, self.education, self.work, self.website, self.twitter, self.linkedin, self.github, self.treehouse, self.codeschool, self.coderwall, self.cities, self.favorites)
     find = "SELECT id FROM students WHERE id = ? ORDER BY id DESC LIMIT 1"
     results = @@db.execute("SELECT MAX(id) FROM students").flatten[0]
     saved! 
