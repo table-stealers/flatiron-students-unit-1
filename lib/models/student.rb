@@ -2,7 +2,7 @@ require_relative '../../config/environment.rb'
 
 class Student 
 
-    attr_accessor :name, :profile_pic, :excerpt, :tag_line, :quote, :bio,
+    attr_accessor :name, :profile_pic, :tag_line, :quote, :bio,
     :education, :work, :website, :twitter, :linkedin, :github, :treehouse,
     :codeschool, :coderwall, :cities, :favorites
   attr_reader :id
