@@ -116,7 +116,6 @@ puts "                              .--.                  Try not.
     def print_student_info(student)
         puts "-------------------------------------------------"
         puts "Student name: #{student.name}"
-        puts "Excerpt: #{student.excerpt}"
         puts "Tag line: #{student.tag_line}"
         puts "Quote: #{student.quote}"
         puts "Website link: #{student.website}"

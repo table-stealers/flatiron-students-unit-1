@@ -22,8 +22,7 @@ class StudentScraper
     s = {
       "name" => Sanitize.clean(scrape_name(scrape_result)),
       "profile_pic" => Sanitize.clean(scrape_profile_pic(scrape_result)),
-      "excerpt" => Sanitize.clean(scrape_student_excerpt(scrape_result)),
-      "tag_line" => Sanitize.clean(scrape_student_tag_line(scrape_result)),
+      "tag_line" => "We <3 Ruby",
       "quote" => Sanitize.clean(scrape_student_quote(scrape_result)),
       "bio" => Sanitize.clean(scrape_student_bio(scrape_result)),
       "education" => Sanitize.clean(scrape_student_education(scrape_result)),
@@ -53,17 +52,9 @@ class StudentScraper
     scrape_result.css("div.top-page-title img").attr("src").value
   end
 
-  def scrape_student_excerpt(scrape_result)
-    scrape_result.collect do |excerpt|
-    excerpt.css("div.excerpt p").first.children.to_s.strip
-    end.join(", ")
-  end
-
-  def scrape_student_tag_line(scrape_result)
-    scrape_result.collect do |tag_line|
-    tag_line.css("p.home-blog-post-meta").children.to_s
-    end.join(", ")
-  end
+  # def scrape_student_tag_line(scrape_result)
+  #   "This is a tag line"
+  # end
 
   def scrape_student_quote(scrape_result)
     scrape_result.css("div.textwidget h3").children.to_s.strip
