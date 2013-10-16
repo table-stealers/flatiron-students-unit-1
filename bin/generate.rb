@@ -15,7 +15,6 @@ class SiteGenerator
         f << student_show.result(binding)
       end
     end
-
   end
 
 end
