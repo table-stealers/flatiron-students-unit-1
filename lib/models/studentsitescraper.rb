@@ -1,5 +1,5 @@
 require_relative '../../config/environment.rb'
-
+require 'pry'
 class StudentSiteScraper
   attr_accessor :index, :index_link
 
@@ -14,6 +14,7 @@ class StudentSiteScraper
     scrape_student_links.each do |student_link| 
       student_scraper = StudentScraper.new(student_link)
       student_scraper.scrape_student_profile
+      
       # @profiles
     end
   end 

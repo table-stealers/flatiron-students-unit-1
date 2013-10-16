@@ -21,16 +21,16 @@ class CLIStudent
         puts "* Welcome to the Flatiron School student command line browser. *"
         puts "* ------------------------------------------------------------ *"
         puts "*                    presented by...                           *"
-        puts "*                          Team Middle                         *"
+        puts "*                  Team Table Stealers                         *"
         puts "****************************************************************"
         # system("say welcome to the flatiron school student command line browser")
         puts
 
-        puts "                .--.                  Try not.
-                    ::\\`--._,'.::.`._.--'/::     Do or do not.
+puts "                              .--.                  Try not.
+                    ::\\`--._,'.::.`._.--'/::      Do or do not.
                     ::::.  ` __::__ '  .::::    There is no try.
                     ::::::-:.`'..`'.:-::::::
-                    ::::::::\\ `--' /::::::::              -Yoda"
+                    ::::::::\\ `--' /::::::::         -Yoda"
 
         system(" say try not. 2>/dev/null ")
         system(" say do. or do not 2>/dev/null")
@@ -81,8 +81,12 @@ class CLIStudent
             if idx.even?
              print "#{idx +1 }: #{student.name}"
             else
-              print ' ' * (30 - previous_student.name.length)
-              puts "#{idx +1}: #{student.name}".rjust(50)
+              if idx < 10
+                print ' ' * (30 - previous_student.name.length)
+              else
+                print ' ' * (29 - previous_student.name.length)
+              end
+              puts "#{idx +1}: #{student.name}".ljust(50)
           end
         end
         puts
@@ -98,9 +102,10 @@ class CLIStudent
             return
         else
             output = Student.find_by_name(input)
-            output.each do |thing|
-                print_student_info(thing)
-            end
+            print_student_info(output)
+            # output.each do |thing|
+            #     print_student_info(thing)
+            # end
 
             return
         end
