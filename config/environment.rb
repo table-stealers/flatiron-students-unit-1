@@ -1,6 +1,8 @@
-require_relative '../lib/models/scraper.rb'
-require_relative '../lib/models/student.rb'
-
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
+require 'sqlite3'
+require_relative '../lib/models/studentsitescraper.rb'
+require_relative '../lib/models/studentscraper.rb'
+require_relative '../lib/models/student.rb'
+require_relative '../lib/models/cli.rb'

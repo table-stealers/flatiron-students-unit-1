@@ -1,11 +1,19 @@
+require_relative '../../config/environment.rb'
+
 class Student 
 
-  attr_accessor :name, :twitter, :linkedin, :facebook, :website
+  attr_accessor :name, :twitter, :linkedin, :github, :website
   attr_reader :id
 
-  @@db = SQLite3::Database.open 'students.db'
+  @@db = SQLite3::Database.open 'db/students.db'
 
   @@all = []
+
+  sql = "DROP TABLE IF EXISTS students" 
+  @@db.execute(sql)
+
+  sql = "CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, website TEXT, twitter TEXT, linkedin TEXT, github TEXT)"
+  @@db.execute(sql)
 
   def initialize(student_hash=nil, id=nil)
     student_hash.map do |k, v|
@@ -78,9 +86,9 @@ class Student
   end
 
   def insert 
-    sql = "INSERT INTO students (name, website, twitter, linkedin, facebook)
+    sql = "INSERT INTO students (name, website, twitter, linkedin, github)
       VALUES (?, ?, ?, ?, ?)"
-    @@db.execute(sql, self.name, self.website, self.twitter, self.linkedin, self.facebook)
+    @@db.execute(sql, self.name, self.website, self.twitter, self.linkedin, self.github)
     find = "SELECT id FROM students WHERE id = ? ORDER BY id DESC LIMIT 1"
     results = @@db.execute("SELECT MAX(id) FROM students").flatten[0]
     saved! 
@@ -92,9 +100,9 @@ class Student
 
   def update
     if saved? 
-      sql = "UPDATE students SET name = ?, website = ?, twitter = ?, linkedin =?, facebook = ?
+      sql = "UPDATE students SET name = ?, website = ?, twitter = ?, linkedin =?, github = ?
         WHERE id = ?"
-      @@db.execute(sql, self.name, self.website, self.twitter, self.linkedin, self.facebook, self.id)
+      @@db.execute(sql, self.name, self.website, self.twitter, self.linkedin, self.github, self.id)
       true
     end
   end

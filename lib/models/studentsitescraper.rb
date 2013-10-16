@@ -1,3 +1,5 @@
+require_relative '../../config/environment.rb'
+
 class StudentSiteScraper
   attr_accessor :index, :index_link
 
@@ -9,9 +11,11 @@ class StudentSiteScraper
 
     def call_scrape 
     self.set_index
-    scrape_student_links
-    scrape_student_profile
-    @profiles
+    scrape_student_links.each do |student_link| 
+      student_scraper = StudentScraper.new(student_link)
+      student_scraper.scrape_student_profile
+      # @profiles
+    end
   end 
 
 #======== Scrape set up ========#

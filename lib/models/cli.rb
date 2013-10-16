@@ -1,6 +1,4 @@
-require_relative './student_class.rb'
-require_relative './student_scrape_class.rb'
-
+require_relative '../../config/environment.rb'
 
 class CLIStudent
 
@@ -25,7 +23,7 @@ class CLIStudent
         puts "*                    presented by...                           *"
         puts "*                          Team Middle                         *"
         puts "****************************************************************"
-        system("say welcome to the flatiron school student command line browser")
+        # system("say welcome to the flatiron school student command line browser")
         puts
 
         puts "                .--.                  Try not.
@@ -34,9 +32,9 @@ class CLIStudent
                     ::::::-:.`'..`'.:-::::::
                     ::::::::\\ `--' /::::::::              -Yoda"
 
-        system(" say try not. ")
-        system(" say do. or do not")
-        system(" say there is no try.")
+        system(" say try not. 2>/dev/null ")
+        system(" say do. or do not 2>/dev/null")
+        system(" say there is no try. 2>/dev/null")
         while self.on?
             self.help
         end
@@ -48,7 +46,7 @@ class CLIStudent
 
     def exit
         puts "Shutting down..."
-        system("say goodbye")
+        # system("say goodbye")
         puts "Goodbye!"
         @on = false
     end
@@ -60,7 +58,7 @@ class CLIStudent
             show
         else
             puts "Invalid command! Try again"
-            system ("say oops")
+            # system ("say oops")
         end
 
     end
@@ -79,14 +77,16 @@ class CLIStudent
 
     def list
         self.students.each_with_index do |student,idx|
+          previous_student = Student.all[idx - 1]
             if idx.even?
-                print "#{student.name}".ljust(10)
+             print "#{idx +1 }: #{student.name}"
             else
-                puts "#{student.name}".rjust(50)
-            end
+              print ' ' * (30 - previous_student.name.length)
+              puts "#{idx +1}: #{student.name}".rjust(50)
+          end
         end
         puts
-        system("say by the way you are super cool and everyone likes you")
+        # system("say by the way you are super cool and everyone likes you")
     end
 
     def show
@@ -105,7 +105,7 @@ class CLIStudent
             return
         end
             puts "Oh no!"
-            system("say mistakes")
+            # system("say mistakes")
     end
 
     def print_student_info(student)
@@ -115,7 +115,7 @@ class CLIStudent
         puts "Twitter page: #{student.twitter}"
         puts "LinkedIn page: #{student.linkedin}"
         puts "-------------------------------------------------"
-        system("say #{student.name}")
+        # system("say #{student.name}")
     end
     
 end
