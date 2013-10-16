@@ -8,12 +8,13 @@ class SiteGenerator
       f << index.result
     end
 
-    student = ERB.new(File.open('lib/views/show.erb').read)
+    student_show = ERB.new(File.open('lib/views/show.erb').read)
 
-    File.open("_site/students/#{student.name.gsub(' ', '_')}.html", 'w+') do |f|
-      f << student.result
+    Student.all.each do |student|
+      File.open("_site/#{student.rel_url}", 'w+') do |f|
+        f << student_show.result(binding)
+      end
     end
-
   end
 
 end

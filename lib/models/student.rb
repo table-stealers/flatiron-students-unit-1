@@ -7,7 +7,7 @@ class Student
     :codeschool, :coderwall, :cities, :favorites
   attr_reader :id
 
-  @@db = SQLite3::Database.open 'db/students.db'
+  @@db = SQLite3::Database.new 'db/students.db'
 
   @@all = []
 
@@ -44,10 +44,10 @@ class Student
   end
 
   def self.find_by_name(name_to_find)
-    @@all.select do |student| 
-      student.name == name_to_find
+    @@all.find do |student| 
+      student.name if student.name.downcase == name_to_find.downcase
     end
-  end
+  end  
 
   def self.find(id_to_find)
     @@all.find do |student| 
