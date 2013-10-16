@@ -1,5 +1,6 @@
 require_relative '../../config/environment.rb'
 require 'pp'
+require 'sanitize'
 class StudentScraper
 
   attr_accessor :name, :profile_pic, :excerpt, :tag_line, :quote, :bio,
@@ -19,23 +20,23 @@ class StudentScraper
       return nil
     end
     s = {
-      "name" => scrape_name(scrape_result),
-      "profile_pic" => scrape_profile_pic(scrape_result),
-      "excerpt" => scrape_student_excerpt(scrape_result),
-      "tag_line" => scrape_student_tag_line(scrape_result),
-      "quote" => scrape_student_quote(scrape_result),
-      "bio" => scrape_student_bio(scrape_result),
-      "education" => scrape_student_education(scrape_result),
-      "work" => scrape_student_work(scrape_result),
+      "name" => Sanitize.clean(scrape_name(scrape_result)),
+      "profile_pic" => Sanitize.clean(scrape_profile_pic(scrape_result)),
+      "excerpt" => Sanitize.clean(scrape_student_excerpt(scrape_result)),
+      "tag_line" => Sanitize.clean(scrape_student_tag_line(scrape_result)),
+      "quote" => Sanitize.clean(scrape_student_quote(scrape_result)),
+      "bio" => Sanitize.clean(scrape_student_bio(scrape_result)),
+      "education" => Sanitize.clean(scrape_student_education(scrape_result)),
+      "work" => Sanitize.clean(scrape_student_work(scrape_result)),
       "website" => @url,
-      "twitter" => scrape_twitter(scrape_result), 
-      "linkedin" => scrape_linkedin(scrape_result), 
-      "github" => scrape_github(scrape_result),
-      "treehouse" => scrape_student_treehouse(scrape_result),
-      "codeschool" => scrape_student_codeschool(scrape_result),
-      "coderwall" => scrape_student_coderwall(scrape_result),
-      "cities" => scrape_cities(scrape_result),
-      "favorites" => scrape_favorites(scrape_result)
+      "twitter" => Sanitize.clean(scrape_twitter(scrape_result)), 
+      "linkedin" => Sanitize.clean(scrape_linkedin(scrape_result)), 
+      "github" => Sanitize.clean(scrape_github(scrape_result)),
+      "treehouse" => Sanitize.clean(scrape_student_treehouse(scrape_result)),
+      "codeschool" => Sanitize.clean(scrape_student_codeschool(scrape_result)),
+      "coderwall" => Sanitize.clean(scrape_student_coderwall(scrape_result)),
+      "cities" => "We all love New York",
+      "favorites" => "We all love coding"
     }
 
     student = Student.new(s)
@@ -55,13 +56,13 @@ class StudentScraper
   def scrape_student_excerpt(scrape_result)
     scrape_result.collect do |excerpt|
     excerpt.css("div.excerpt p").first.children.to_s.strip
-    end
+    end.join(", ")
   end
 
   def scrape_student_tag_line(scrape_result)
     scrape_result.collect do |tag_line|
     tag_line.css("p.home-blog-post-meta").children.to_s
-    end
+    end.join(", ")
   end
 
   def scrape_student_quote(scrape_result)
@@ -75,7 +76,7 @@ class StudentScraper
   def scrape_student_education(scrape_result)
     scrape_result.css("div#ok-text-column-3 ul li").collect do |x|
     x.text.to_s
-    end
+    end.join(", ")
   end
 
   def scrape_student_work(scrape_result)
@@ -106,24 +107,26 @@ class StudentScraper
     end.compact.first
   end
 
-  def scrape_cities(scrape_result)
-    scrape_result.css('h3').each do |header|
-      if header.text.downcase.strip == "favorite cities"
-        cities = header.parent.parent.css("a").collect do |city|
-        city.text
-        end
-      end
-    end
-  end
+  # def scrape_cities(scrape_result)
 
-  def scrape_favorites(scrape_result)
-    scrape_result.css('h3').each do |header|
-      if header.text.downcase.strip == "favorites"
-        favorites = header.parent.parent.css("a").collect do |header|
-        end
-      end
-    end
-  end
+  #   scrape_result.css("div#ok-text-column-2.column div.services p br").first
+  #   # .each do |header|
+  #   #   if header.text.downcase.strip == "favorite cities"
+  #   #     cities = header.parent.parent.css("a").collect do |city|
+  #   #     city.text
+  #   #     end.join(", ")
+  #   #   end
+  #   # end
+  # end
+
+  # def scrape_favorites(scrape_result)
+  #   scrape_result.css('h3').each do |header|
+  #     if header.text.downcase.strip == "favorites"
+  #       favorites = header.parent.parent.css("a").collect do |header|
+  #       end.join(", ")
+  #     end
+  #   end
+  # end
 
   def scrape_twitter(scrape_result)
     scrape_result.css(".page-title .icon-twitter").first.parent.attr("href")
