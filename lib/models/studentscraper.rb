@@ -57,11 +57,11 @@ class StudentScraper
   # end
 
   def scrape_student_quote(scrape_result)
-    scrape_result.css("div.textwidget h3").children.to_s.strip
+    scrape_result.css("div.textwidget h3").children.to_s.strip.gsub(/\s+/, " ")
   end
 
   def scrape_student_bio(scrape_result)
-    scrape_result.css("div#ok-text-column-2 p").first.to_s.strip
+    scrape_result.css("div#ok-text-column-2 p").first.to_s.strip.gsub(/\s+/, " ")
   end
 
   def scrape_student_education(scrape_result)
@@ -71,7 +71,7 @@ class StudentScraper
   end
 
   def scrape_student_work(scrape_result)
-    scrape_result.css("div#ok-text-column-4 p").first.to_s.strip
+    scrape_result.css("div#ok-text-column-4 p").first.to_s.strip.gsub(/\s+/, " ")
   end
 
   def scrape_student_treehouse(scrape_result)
