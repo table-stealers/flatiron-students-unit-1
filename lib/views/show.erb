@@ -101,12 +101,12 @@
 
       <!-- Begin Title Content -->
       <div class="page-title">
-        <h4 class="ib_main_header">Alex Chiu</h4>
+        <h4 class="ib_main_header"><%= student.name %></h4>
         <div class="social-icons">
-          <a href="https://twitter.com/TheRealChiu"><i class="icon-twitter ib-social-icons"></i></a>
-          <a href="http://www.linkedin.com/profile/view?id=160096053&trk=nav_responsive_tab_profile_pic"><i class="icon-linkedin-sign ib-social-icons"></i></a>
-          <a href="https://github.com/AYC726"><i class="icon-github ib-social-icons"></i></a>
-          <a href="#"><i class="icon-rss ib-social-icons"></i></a>
+          <a href="<%= student.twitter %>"><i class="icon-twitter ib-social-icons"></i></a>
+          <a href="<%= student.linkedin %>"><i class="icon-linkedin-sign ib-social-icons"></i></a>
+          <a href="<%= student.github %>"><i class="icon-github ib-social-icons"></i></a>
+          <a href="<%= student.website ? student.website : "#" %>"><i class="icon-rss ib-social-icons"></i></a>
         </div>
 
         <div class="section section-testimonials-curriculum quote-div">
@@ -114,7 +114,7 @@
             <ul class="testimonials slides">
               <li id="text-7" class="widget_text" style="list-style: none; display: list-item;">
                 <div class="textwidget">
-                  <h3>"Anything is possible it is the beauty of living!!" -- Alex Chiu.</h3>
+                  <h3><%= student.quote %></h3>
                 </div>
               </li>
             </ul>
@@ -138,7 +138,7 @@
                 <div class="services-title"><h3>Biography</h3></div>
                 <div class="clear"></div>
                 <p>
-                  Aspiring web developer, currently enrolled at the Flatiron School 003. I spent the first 7 years of my career at the Boeing company, designing and building the cabin of the 787 Dreamliner. As the internet and mobile applications has grown to take over the world, I realized I needed new skills to design and innovate the next big thing. On my free time you can find me rock climbing in th summer, snowboarding in the winter and scuba diving while I am traveling.  
+                  <%= student.bio %>
                 </p>
               </div>
             </div>
@@ -148,8 +148,7 @@
                 <div class="services-title"><h3>Education</h3></div>
                 <div class="clear"></div>
                 <ul>
-                  <li>B.E. Electrical Engineering and Math, Stony Brook University</li>
-                  <li>M.S. Engineering Management,University of Southern California</li>
+                  <%= student.edu %>
                 </ul>
               </div>
             </div>
@@ -160,7 +159,7 @@
                 <div class="clear"></div>
                 
                 <p>
-                  System Engineer for Cabin Interior of the 787 The Boeing Company
+                  <%= student.work %>
                 </p>
               </div>
             </div>
@@ -176,19 +175,19 @@
               <div class="services-wrap section coder-cred" id="equalize">
 
                 <div class="column fourth">
-                  <a href="http://www.github.com/" target="_blank"><img src="../img/github.png" alt="GitHub" width="130px"></a>
+                  <a href="<%= student.github %>" target="_blank"><img src="../img/github.png" alt="GitHub" width="130px"></a>
                 </div>
 
                 <div class="column fourth">
-                  <a href="http://teamtreehouse.com/" target="_blank"><img src="../img/treehouse.png" alt="Treehouse" width="130px"></a>
+                  <a href="<%= student.treehouse %>" target="_blank"><img src="../img/treehouse.png" alt="Treehouse" width="130px"></a>
                 </div>
 
                 <div class="column fourth">
-                  <a href="http://www.codeschool.com/users/" target="_blank"><img src="../img/codeschool.jpg" alt="Code School" width="130"></a>
+                  <a href="<%= student.codeschool %>" target="_blank"><img src="../img/codeschool.jpg" alt="Code School" width="130"></a>
                 </div>
 
                 <div class="column fourth">
-                  <a href="https://coderwall.com/" target="_blank"><img src="../img/coderwall.png" alt="Coder Wall" width="130"></a>
+                  <a href="<%= student.coderwall %>" target="_blank"><img src="../img/coderwall.png" alt="Coder Wall" width="130"></a>
                 </div>
               </div>
               <! -- End Service -->
@@ -210,12 +209,7 @@
                       <h3>Coding Profiles</h3>
                     </div>
                     <div class="clear"></div>
-                    <p>
-                      - <a href="http://www.codeschool.com/">Code School</a><br>
-                      - <a href="http://teamtreehouse.com/">Treehouse</a><br>
-                      - <a href="http://www.codecademy.com/">Codecademy</a><br>
-                      - <a href="https://coderwall.com/">Coder Wall</a><br>
-                    </p>
+                    <%= student.recent_profiles %>
                   </div>
                 </div>
 
@@ -226,8 +220,7 @@
                     </div>
                     <div class="clear"></div>
                     <p>
-                      - <a href="http://ayc726.github.io/">Personal Blog</a><br>
-                      - <a href="#">Tumblr</a><br>
+                      <%= student.recent_blogs %>
                     </p>
                   </div>
                 </div>
@@ -238,7 +231,7 @@
                       <h3>Personal Projects</h3>
                     </div>
                     <div class="clear"></div>
-                    <p>Comming Soon..</p>
+                    <%= student.recent_projects %>
                   </div>
                 </div>
             </div>
@@ -255,38 +248,29 @@
                 <div id="ok-text-column-2" class="column ok-text-column" style="height: 204px;">
                   <div class="services">
                     <div class="services-title">
-                      <h3>Favorite Cities</h3>
+                      <h3><%= student.favorite1_title %></h3>
                     </div>
                     <div class="clear"></div>
-                    <p>
-                      <a>Singapore</a><br>
-                      <a>Seattle</a><br>
-                      <a>San Francisco</a><br>
-                      <a>New York</a><br>
-                    </p>
+                    <%= student.favorite1_content %>
                   </div>
                 </div>
 
                 <div id="ok-text-column-3" class="column ok-text-column" style="height: 204px;">
                   <div class="services">
-                    <div class="services-title"><h3>Favorites</h3>
+                    <div class="services-title"><h3><%= student.favorite2_title %></h3>
                   </div>
                   <div class="clear"></div>
-                  <p>
-                    - Favorite Website: <a href="#">Site 1</a><br>
-                    - Favorite Comic: <a href="#">Site 2</a><br>
-                    - Favorite Radio Program: <a href="#">Site 3</a><br>
-                  </p>
+                  <%= student.favorite2_content %>
                 </div>
               </div>
 
               <div id="ok-text-column-4" class="column ok-text-column" style="height: 204px;">
                 <div class="services">
                   <div class="services-title">
-                    <h3>Flatiron School Projects</h3>
+                    <h3><%= student.favorite3_title %></h3>
                   </div>
                   <div class="clear"></div>
-                  <p>Comming Soon..</p>
+                  <%= student.favorite3_content %>
                 </div>
               </div>
             </div>

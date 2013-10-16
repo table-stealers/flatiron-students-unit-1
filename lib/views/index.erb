@@ -103,22 +103,22 @@
               <li class="home-blog-post">
                 <div class="blog-thumb">
                   <a href="students/">
-                    <img width="304" height="304" class="prof-image" src="./img/alex_chiu_profile_pic.jpg" class="attachment-blog-thumb wp-post-image" alt="<%= student_object.name %>">
+                    <img width="304" height="304" class="prof-image" src="./img/<%= student_object.index_pic %>" class="attachment-blog-thumb wp-post-image" alt="<%= student_object.name %>">
                   </a>
                 </div>
 
                 <div class="blog-title">
                   <div class="big-comment">
                     <h3>
-                      <a href="students/alex_chiu.html">Alex Chiu</a>
+                      <a href="<%= student_object.rel_url %>"><%= student_object.name %></a>
                     </h3>
                   </div>
-                  <p class="home-blog-post-meta">Making the Impossible, Possible</p>
+                  <p class="home-blog-post-meta"><%= student_object.tagline %></p>
                 </div>
                 <div class="clear"></div>
 
                 <div class="excerpt">
-                  <p>Aspiring web developer at the Flatiron School 003. </p>
+                  <p><%= student.excerpt %></p>
                 </div>
                 <div class="clear"></div>
               </li> 
