@@ -8,11 +8,11 @@ class SiteGenerator
       f << index.result
     end
 
-    student = ERB.new(File.open('lib/views/show.erb').read)
+    # student = ERB.new(File.open('lib/views/show.erb').read)
 
-    File.open("_site/students/#{student.name.gsub(' ', '_')}.html", 'w+') do |f|
-      f << student.result
-    end
+    # File.open("_site/students/#{student.name.gsub(' ', '_')}.html", 'w+') do |f|
+    #   f << student.result
+    # end
 
   end
 
