@@ -6,8 +6,9 @@ class StudentScraper
     :education, :work, :website, :twitter, :linkedin, :github, :treehouse,
     :codeschool, :coderwall, :cities, :favorites
 
-  def initialize(url)
-    @url = url 
+  def initialize(url, info = {})
+    @url = url
+    @index_info = info
   end
 
   def scrape_student_profile
@@ -35,7 +36,9 @@ class StudentScraper
       "coderwall" => Sanitize.clean(scrape_student_coderwall(scrape_result)),
       "cities" => "We all love New York",
       "favorites" => "We all love coding"
-    }
+    }.merge(@index_info)
+
+    p s
 
     student = Student.new(s)
     student.save

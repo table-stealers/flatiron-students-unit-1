@@ -11,17 +11,29 @@ class StudentSiteScraper
 
     def call_scrape 
     self.set_index
-    scrape_student_links.each do |student_link| 
-      student_scraper = StudentScraper.new(student_link)
+
+    student_url = scrape_student_links
+    student_info = scrape_student_index_info
+
+    student_url.zip(student_info).each do |student_link, student_info| 
+      student_scraper = StudentScraper.new(student_link, student_info)
       student_scraper.scrape_student_profile
-      
-      # @profiles
     end
   end 
 
 #======== Scrape set up ========#
   def set_index
     @index = Nokogiri::HTML(open(@url))
+  end
+
+  def scrape_student_index_info
+    @index.css('li.home-blog-post').collect do |student_root|
+      {}.tap do |hash|
+        hash[:index_pic] = student_root.css('img.prof-image').attr('src').value
+        hash[:tag_line] = student_root.css('p.home-blog-post-meta').text
+        hash[:excerpt] = student_root.css('div.excerpt p').text
+      end
+    end
   end
 
   def scrape_student_links
