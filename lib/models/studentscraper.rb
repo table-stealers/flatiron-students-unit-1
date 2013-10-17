@@ -24,13 +24,17 @@ class StudentScraper
 
   def download_images
     @@images.uniq.each do |image_path|
-      next if image_path.match(/http|com/)
+      next if image_path.match(/http|com|www/)
       begin
         open("_site/img/#{image_path.sub(/^\.\.\/img\/(?:students\/)/, '')}", 'wb') do |file|
           file << open("http://students.flatironschool.com/students/#{image_path}").read
         end
+      rescue
+        p "Could not scrape #{image_path}"
       end
     end
+
+    @@images.clear
   end
 
   def scrape_student_profile
