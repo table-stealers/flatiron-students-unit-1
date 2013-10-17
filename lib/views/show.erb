@@ -10,7 +10,7 @@
   <link rel='stylesheet' href="../assets/style.css" type='text/css' media='all' />
   <style>
     .top-page-title {
-      background: url(<%= student.background_img %>) no-repeat top center;
+      background: url(<%= %> student.background_img %>) no-repeat top center;
     }
   </style>
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
@@ -209,7 +209,7 @@
                       <h3>Coding Profiles</h3>
                     </div>
                     <div class="clear"></div>
-                    <%= student.recent_profiles %>
+                    <%= %> student.recent_profiles
                   </div>
                 </div>
 
@@ -220,7 +220,7 @@
                     </div>
                     <div class="clear"></div>
                     <p>
-                      <%= student.recent_blogs %>
+                      <%= %> student.recent_blogs
                     </p>
                   </div>
                 </div>
@@ -231,7 +231,7 @@
                       <h3>Personal Projects</h3>
                     </div>
                     <div class="clear"></div>
-                    <%= student.recent_projects %>
+                    <%= %> student.recent_projects
                   </div>
                 </div>
             </div>
@@ -248,29 +248,29 @@
                 <div id="ok-text-column-2" class="column ok-text-column" style="height: 204px;">
                   <div class="services">
                     <div class="services-title">
-                      <h3><%= student.favorite1_title %></h3>
+                      <h3><%= %> student.favorite1_title</h3>
                     </div>
                     <div class="clear"></div>
-                    <%= student.favorite1_content %>
+                    <%= student.favorites %> <!--student.favorite1_content-->
                   </div>
                 </div>
 
                 <div id="ok-text-column-3" class="column ok-text-column" style="height: 204px;">
                   <div class="services">
-                    <div class="services-title"><h3><%= student.favorite2_title %></h3>
+                    <div class="services-title"><h3><%= %> student.favorite2_title</h3>
                   </div>
                   <div class="clear"></div>
-                  <%= student.favorite2_content %>
+                  <%= %> student.favorite2_content
                 </div>
               </div>
 
               <div id="ok-text-column-4" class="column ok-text-column" style="height: 204px;">
                 <div class="services">
                   <div class="services-title">
-                    <h3><%= student.favorite3_title %></h3>
+                    <h3><%= %> student.favorite3_title</h3>
                   </div>
                   <div class="clear"></div>
-                  <%= student.favorite3_content %>
+                  <%= %> student.favorite3_content
                 </div>
               </div>
             </div>
