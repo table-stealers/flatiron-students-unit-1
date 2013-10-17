@@ -103,7 +103,7 @@
               <li class="home-blog-post">
                 <div class="blog-thumb">
                   <a href="<%= student_object.website.sub('http://students.flatironschool.com/', '') %>">
-                    <img width="304" height="304" class="prof-image" src="./img/<%= %> student_object.index_pic %>" class="attachment-blog-thumb wp-post-image" alt="<%= student_object.name %>">
+                    <img width="304" height="304" class="prof-image" src="./img/<%= student_object.index_pic %>" class="attachment-blog-thumb wp-post-image" alt="<%= student_object.name %>">
                   </a>
                 </div>
 
@@ -113,12 +113,12 @@
                       <a href="<%= student_object.website.sub('http://students.flatironschool.com/', '') %>"><%= student_object.name %></a>
                     </h3>
                   </div>
-                  <p class="home-blog-post-meta"><%= %> student_object.tagline</p>
+                  <p class="home-blog-post-meta"><%= student_object.tag_line %></p>
                 </div>
                 <div class="clear"></div>
 
                 <div class="excerpt">
-                  <p><%= student_object.quote %></p>
+                  <p><%= student_object.excerpt %></p>
                 </div>
                 <div class="clear"></div>
               </li> 
