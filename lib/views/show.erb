@@ -10,7 +10,7 @@
   <link rel='stylesheet' href="../assets/style.css" type='text/css' media='all' />
   <style>
     .top-page-title {
-      background: url(<%= %> student.background_img %>) no-repeat top center;
+      background: url(<%= student.background_img.sub(/students\//, '') %>) no-repeat top center;
     }
   </style>
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
