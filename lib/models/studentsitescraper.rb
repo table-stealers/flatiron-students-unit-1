@@ -14,6 +14,7 @@ class StudentSiteScraper
 
     student_url = scrape_student_links
     student_info = scrape_student_index_info
+    #scrape_images
 
     student_url.zip(student_info).each do |student_link, student_info| 
       student_scraper = StudentScraper.new(student_link, student_info)
@@ -41,6 +42,20 @@ class StudentSiteScraper
       "http://students.flatironschool.com/" + "#{link.attr("href")}"
     end
     @student_url.uniq!
+  end
+
+  def scrape_images
+    @index.css('img').each do |img|
+      image_path = img.attr('src')
+      next if image_path.match(/http|com|www/)
+      begin
+        open("_site/#{image_path.sub(/(?:students\/)/, '')}", 'wb') do |file|
+          file << open("http://students.flatironschool.com/#{image_path}").read
+        end
+      rescue
+        p "Could not scrape #{image_path.sub(/(?:students\/)/, '')}"
+      end
+    end
   end
 
 end
