@@ -4,7 +4,7 @@ class SiteGenerator
   def generate
     scrape = StudentSiteScraper.new("http://students.flatironschool.com")
     array_of_students = scrape.call_scrape
-
+    #Student.load_students
     index = ERB.new(File.open('lib/views/index.erb').read)
 
     File.open('_site/index.html', 'w+') do |f|

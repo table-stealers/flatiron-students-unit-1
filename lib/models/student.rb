@@ -1,5 +1,5 @@
 require_relative '../../config/environment.rb'
-
+require 'pry'
 class Student 
 
     attr_accessor :name, :profile_pic, :tag_line, :quote, :bio,
@@ -67,7 +67,7 @@ class Student
   # end
 
   def self.load(id)
-    sql = "SELECT * FROM students WHERE id = ?"
+    sql = "SELECT () FROM students WHERE id = ?"
     result = @@db.execute(sql, id)
     Student.new_with_row(result.flatten)
   end
@@ -76,6 +76,15 @@ class Student
     s = Student.new(nil, row[0])
     s.name = row[1]
     s
+  end
+
+  def self.load_students
+    sql = "SELECT id, name, profile_pic, tag_line, quote, bio, education, work, website, twitter, linkedin, github, treehouse, codeschool, coderwall, cities, favorites FROM students LIMIT 1"
+    result = @@db.execute(sql)
+    p result
+    binding.pry
+    #(id , name, profile_pic, tag_line, quote, bio, education, work, website, twitter, linkedin, github, treehouse, codeschool, coderwall, cities, favorites)
+    #Student.new_with_row(result.flatten)    
   end
 
 
