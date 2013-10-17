@@ -1,6 +1,5 @@
 require_relative '../../config/environment.rb'
-require 'pp'
-require 'sanitize'
+
 class StudentScraper
 
   attr_accessor :name, :profile_pic, :excerpt, :tag_line, :quote, :bio,
@@ -24,9 +23,9 @@ class StudentScraper
       "profile_pic" => Sanitize.clean(scrape_profile_pic(scrape_result)),
       "tag_line" => "We <3 Ruby",
       "quote" => Sanitize.clean(scrape_student_quote(scrape_result)),
-      "bio" => Sanitize.clean(scrape_student_bio(scrape_result)),
+      "bio" => scrape_student_bio(scrape_result),
       "education" => Sanitize.clean(scrape_student_education(scrape_result)),
-      "work" => Sanitize.clean(scrape_student_work(scrape_result)),
+      "work" => scrape_student_work(scrape_result),
       "website" => @url,
       "twitter" => Sanitize.clean(scrape_twitter(scrape_result)), 
       "linkedin" => Sanitize.clean(scrape_linkedin(scrape_result)), 
@@ -61,7 +60,7 @@ class StudentScraper
   end
 
   def scrape_student_bio(scrape_result)
-    scrape_result.css("div#ok-text-column-2 p").first.to_s.strip.gsub(/\s+/, " ")
+    (Sanitize.clean(scrape_result.css("div#ok-text-column-2 p").first.to_s)).squish
   end
 
   def scrape_student_education(scrape_result)
@@ -71,7 +70,7 @@ class StudentScraper
   end
 
   def scrape_student_work(scrape_result)
-    scrape_result.css("div#ok-text-column-4 p").first.to_s.strip.gsub(/\s+/, " ")
+    (Sanitize.clean(scrape_result.css("div#ok-text-column-4 p").first.to_s)).squish
   end
 
   def scrape_student_treehouse(scrape_result)
