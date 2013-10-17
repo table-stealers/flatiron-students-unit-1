@@ -14,7 +14,8 @@ class SiteGenerator
     student_show = ERB.new(File.open('lib/views/show.erb').read)
 
     Student.all.each do |student|
-      File.open("_site/#{student.rel_url}", 'w+') do |f|
+      rel_url = student.website.sub('http://students.flatironschool.com/', '')
+      File.open("_site/#{rel_url}", 'w+') do |f|
         f << student_show.result(binding)
       end
     end
