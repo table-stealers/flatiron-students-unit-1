@@ -38,8 +38,6 @@ class StudentScraper
       "favorites" => "We all love coding"
     }.merge(@index_info)
 
-    p s
-
     student = Student.new(s)
     student.save
   end
