@@ -16,7 +16,13 @@ class StudentScraper
     scrape_result.css('img').each do |img|
       @@images << img.attr('src')
     end
+  end
 
+  def scrape_bg_image(scrape_result)
+    @@images << scrape_result.css('head').css('style').to_s.match(/url\((.*)\)/).to_a.last
+  end
+
+  def download_images
     @@images.uniq.each do |image_path|
       next if image_path.match(/http|com/)
       begin
@@ -37,6 +43,8 @@ class StudentScraper
     end
 
     #scrape_images(scrape_result)
+    #scrape_bg_image(scrape_result)
+    download_images
 
     s = {
       "name" => Sanitize.clean(scrape_name(scrape_result)),
@@ -55,6 +63,7 @@ class StudentScraper
       "coderwall" => Sanitize.clean(scrape_student_coderwall(scrape_result)),
       "cities" => "We all love New York",
       "favorites" => "We all love coding",
+      "background_img" => Sanitize.clean(scrape_student_bg_pic(scrape_result))
     }.merge(@index_info)
 
     student = Student.new(s)
@@ -156,6 +165,10 @@ class StudentScraper
       icon.parent.attr('href')
       end
     end.compact.first
+  end
+
+  def scrape_student_bg_pic(scrape_result)
+    scrape_result.css('head').css('style').to_s.match(/url\((.*)\)/).to_a.last
   end
 
 end
