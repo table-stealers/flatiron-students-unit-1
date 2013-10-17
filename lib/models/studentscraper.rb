@@ -1,6 +1,7 @@
 require_relative '../../config/environment.rb'
 
 class StudentScraper
+  @@images = []
 
   attr_accessor :name, :profile_pic, :excerpt, :tag_line, :quote, :bio,
     :education, :work, :website, :twitter, :linkedin, :github, :treehouse,
@@ -11,6 +12,21 @@ class StudentScraper
     @index_info = info
   end
 
+  def scrape_images(scrape_result)
+    scrape_result.css('img').each do |img|
+      @@images << img.attr('src')
+    end
+
+    @@images.uniq.each do |image_path|
+      next if image_path.match(/http|com/)
+      begin
+        open("_site/img/#{image_path.sub(/^\.\.\/img\/(?:students\/)/, '')}", 'wb') do |file|
+          file << open("http://students.flatironschool.com/students/#{image_path}").read
+        end
+      end
+    end
+  end
+
   def scrape_student_profile
     begin
       scrape_result = Nokogiri::HTML(open(@url))
@@ -19,6 +35,9 @@ class StudentScraper
     #rescue OpenURI::HTTPError
       return nil
     end
+
+    #scrape_images(scrape_result)
+
     s = {
       "name" => Sanitize.clean(scrape_name(scrape_result)),
       "profile_pic" => Sanitize.clean(scrape_profile_pic(scrape_result)),
